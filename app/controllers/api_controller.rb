@@ -1,4 +1,5 @@
 require 'digest'
+require 'open-uri'
 class ApiController < ApplicationController
   def validarFirma
   	if !params.key?('hash') || !params.key?('mensaje') 
@@ -16,5 +17,11 @@ class ApiController < ApplicationController
 
   def status
   	render :nothing => true, :status => 201
+  end
+  def texto
+    @text =open('http://s3.amazonaws.com/files.principal/texto.txt') { |f| f.read }
+    @codificado=Digest::SHA256.hexdigest @text
+    @text=@text.force_encoding(Encoding::UTF_8)
+    render :status => 200, json: {text:@text , hash:@codificado}
   end
 end
