@@ -1,1 +1,0 @@
-json.extract! @message, :valido, :mensaje => Message
