@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'api/validarFirma'
+  post 'api/validarFirma'
 
   get 'api/status'
 
